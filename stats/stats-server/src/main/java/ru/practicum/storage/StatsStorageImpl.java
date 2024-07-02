@@ -63,7 +63,7 @@ public class StatsStorageImpl implements StatsStorage {
             argMap.put("start", start);
             argMap.put("end", end);
             rs = jdbcTemplate.queryForRowSet(SELECT_STATISTICS_ALL_UNIQUE_SQL, argMap);
-        } else if (unique){
+        } else if (unique) {
             argMap.put("start", start);
             argMap.put("end", end);
             argMap.put("uris", uris);
