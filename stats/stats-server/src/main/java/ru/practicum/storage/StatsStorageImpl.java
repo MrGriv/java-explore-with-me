@@ -44,13 +44,12 @@ public class StatsStorageImpl implements StatsStorage {
             "WHERE s.timestamp BETWEEN :start AND :end AND s.uri IN (:uris) " +
             "GROUP BY uri, application " +
             "ORDER BY COUNT(uri) DESC ";
-
     private static final String SELECT_STATISTICS_WITH_URI_IP_SQL = "SELECT application, uri, COUNT(uri) " +
             "FROM statistics AS s " +
             "WHERE s.timestamp BETWEEN :start AND :end AND s.uri IN (:uris) AND s.ip = :ip " +
             "GROUP BY uri, application " +
             "ORDER BY COUNT(uri) DESC ";
-    
+
     @Override
     public ResponseEntity<Void> hit(EndpointHit hit) {
         Map<String, Object> argMap = new HashMap<>();
