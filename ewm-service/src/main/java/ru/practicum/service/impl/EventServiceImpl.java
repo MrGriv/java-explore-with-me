@@ -56,6 +56,7 @@ public class EventServiceImpl implements EventService {
     private final StatsClient statsClient;
     private static final QEvent qEvent = QEvent.event;
     //Private
+
     @Override
     public ResponseEntity<EventFullDto> add(NewEventDto newEventDto, Long userId) {
         if (newEventDto.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
@@ -230,7 +231,7 @@ public class EventServiceImpl implements EventService {
         return events.isEmpty() ? new ArrayList<>() : setCategoriesAndReturnList(events.toList());
     }
 
-    private List<EventFullDto> setCategoriesAndReturnList (List<Event> events) {
+    private List<EventFullDto> setCategoriesAndReturnList(List<Event> events) {
         List<Long> categoriesId = new ArrayList<>();
         for (Event event : events) {
             categoriesId.add(event.getCategory());

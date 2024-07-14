@@ -20,8 +20,8 @@ public class Compilation {
     @Column(name = "compilation_id")
     private Long id;
     @ElementCollection
-    @CollectionTable(name="compilation_event", joinColumns=@JoinColumn(name="compilation_id"))
-    @Column(name="event_id")
+    @CollectionTable(name = "compilation_event", joinColumns = @JoinColumn(name = "compilation_id"))
+    @Column(name = "event_id")
     private List<Long> events;
     private Boolean pinned;
     private String title;
