@@ -1,24 +1,22 @@
 package ru.practicum;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class EndpointHit {
-    Long id;
+    private Long id;
     @NotNull
-    String app;
+    private String app;
     @NotNull
-    String uri;
+    private String uri;
     @NotNull
-    String ip;
+    private String ip;
     @NotNull
-    String timestamp;
+    private String timestamp;
 }
