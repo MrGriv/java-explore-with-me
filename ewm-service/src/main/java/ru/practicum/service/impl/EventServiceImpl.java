@@ -153,7 +153,7 @@ public class EventServiceImpl implements EventService {
         Event event = eventStorage.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Event: Событие с id=" + eventId + " не найдено"));
         List<Request> requests = requestStorage.findAllByEventAndRequesterIn(incomingRequests.getRequestIds(), eventId, userId);
-        if (event.getParticipantLimit() == event.getConfirmedRequests()) {
+        if (event.getParticipantLimit().equals(event.getConfirmedRequests())) {
             throw new ConflictException("Request: Нельзя добавить участников на событие, если лимит участников" +
                     " исчерпан limit=" + event.getParticipantLimit());
         }
