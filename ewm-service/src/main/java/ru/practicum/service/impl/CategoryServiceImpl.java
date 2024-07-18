@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.dto.category.CategoryDto;
 import ru.practicum.dto.category.NewCategoryDto;
 import ru.practicum.exception.NotFoundException;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryStorage categoryStorage;
@@ -37,17 +39,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto update(Long id, NewCategoryDto newCategoryDto) {
+    public ResponseEntity<CategoryDto> update(Long id, NewCategoryDto newCategoryDto) {
         Category updatedCategory = categoryStorage.findById(id)
                 .orElseThrow(() -> new NotFoundException("Category: Категория с id=" + id + " не найдена"));
         if (!updatedCategory.getName().equals(newCategoryDto.getName())) {
             updatedCategory.setName(newCategoryDto.getName());
-            return categoryMapper.toDto(categoryStorage.save(updatedCategory));
+            return new ResponseEntity<>(categoryMapper.toDto(categoryStorage.save(updatedCategory)), HttpStatus.OK);
         }
-        return categoryMapper.toDto(updatedCategory);
+        return new ResponseEntity<>(categoryMapper.toDto(updatedCategory), HttpStatus.OK);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CategoryDto> get(int from, int size) {
         PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
         Page<Category> categories = categoryStorage.findAll(page);

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.practicum.model.LocationDb;
-import ru.practicum.model.User;
+import ru.practicum.model.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

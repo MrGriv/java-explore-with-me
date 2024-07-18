@@ -2,7 +2,7 @@ package ru.practicum.storage;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ru.practicum.model.User;
+import ru.practicum.model.user.User;
 import ru.practicum.model.event.Event;
 import ru.practicum.model.request.Request;
 
@@ -22,4 +22,14 @@ public interface RequestStorage extends JpaRepository<Request, Long>  {
             "join r.event as e " +
             "where r.id in ?1 and e.id = ?2 and e.initiator.id = ?3")
     List<Request> findAllByEventAndRequesterIn(List<Long> requestIds, Long eventId, Long initiatorId);
+
+    @Query("select r from Request r " +
+            "join r.requester as u " +
+            "where u.id = ?1 and r.status = 'CONFIRMED'")
+    List<Request> findAllByRequesterAnsStatusConfirmed(Long requesterId);
+
+    @Query("select r from Request r " +
+            "join r.event as e " +
+            "where e.id in ?1 and r.requester.id = ?2")
+    List<Request> findAllByEventId(List<Long> eventIds, Long requesterId);
 }

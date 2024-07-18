@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.practicum.model.user.ShowEventsState;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -24,4 +25,5 @@ public class UserDto {
     @NotEmpty
     @Size(min = 6, max = 254)
     private String email;
+    private ShowEventsState showEventsState;
 }

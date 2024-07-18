@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import ru.practicum.model.User;
+import ru.practicum.model.user.User;
 import ru.practicum.model.event.Event;
 
 import java.util.List;
@@ -21,4 +21,6 @@ public interface EventStorage extends JpaRepository<Event, Long>, QuerydslPredic
     Optional<Event> findPublishedEventById(Long eventId);
 
     List<Event> findAllByIdIn(List<Long> id);
+
+    Page<Event> findAllByIdIn(List<Long> id, Pageable pageable);
 }

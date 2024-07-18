@@ -1,15 +1,16 @@
 package ru.practicum.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.dto.request.ParticipationRequestDto;
 import ru.practicum.exception.ConflictException;
 import ru.practicum.exception.NotFoundException;
 import ru.practicum.mapper.RequestMapper;
-import ru.practicum.model.User;
+import ru.practicum.model.user.ShowEventsState;
+import ru.practicum.model.user.User;
 import ru.practicum.model.event.Event;
 import ru.practicum.model.event.EventState;
 import ru.practicum.model.request.Request;
@@ -25,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class RequestServiceImpl implements RequestService {
     private final RequestStorage requestStorage;
@@ -62,6 +63,12 @@ public class RequestServiceImpl implements RequestService {
         request.setRequester(requester);
         if (event.getParticipantLimit() == 0 || !event.getRequestModeration()) {
             request.setStatus(RequestStatus.CONFIRMED);
+            if (requester.getShowEventsState().equals(ShowEventsState.ALL)) {
+                List<Long> events = requester.getUserEvents().isEmpty() ? new ArrayList<>() : requester.getUserEvents();
+                events.add(event.getId());
+                requester.setUserEvents(events);
+                userStorage.save(requester);
+            }
         } else {
             request.setStatus(RequestStatus.PENDING);
         }
@@ -73,6 +80,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ParticipationRequestDto> get(Long userId) {
         User requester = userStorage.findById(userId)
                 .orElseThrow(() -> new NotFoundException("User: Пользователь с id=" + userId + " не найден"));

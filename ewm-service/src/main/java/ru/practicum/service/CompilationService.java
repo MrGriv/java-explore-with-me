@@ -12,7 +12,7 @@ public interface CompilationService {
 
     ResponseEntity<Void> delete(Long compilationId);
 
-    CompilationDto update(UpdateCompilationRequest updateCompilation, Long compilationId);
+    ResponseEntity<CompilationDto> update(UpdateCompilationRequest updateCompilation, Long compilationId);
 
     List<CompilationDto> get(Boolean pinned, int from, int size);
 

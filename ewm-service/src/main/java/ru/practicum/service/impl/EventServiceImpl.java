@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.StatsClient;
 import ru.practicum.ViewStats;
 import ru.practicum.dto.Location;
@@ -26,7 +27,8 @@ import ru.practicum.mapper.LocationMapper;
 import ru.practicum.mapper.RequestMapper;
 import ru.practicum.model.Category;
 import ru.practicum.model.LocationDb;
-import ru.practicum.model.User;
+import ru.practicum.model.user.ShowEventsState;
+import ru.practicum.model.user.User;
 import ru.practicum.model.event.*;
 import ru.practicum.model.request.Request;
 import ru.practicum.model.request.RequestStatus;
@@ -42,6 +44,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
     private final EventStorage eventStorage;
@@ -83,6 +86,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<EventFullDto> get(Long userId, int from, int size) {
         User initiator = userStorage.findById(userId)
                 .orElseThrow(() -> new NotFoundException("User: Пользователь с id=" + userId + " не найден"));
@@ -133,6 +137,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ParticipationRequestDto> getInitiatorRequests(Long userId, Long eventId) {
         User initiator = userStorage.findById(userId)
                 .orElseThrow(() -> new NotFoundException("User: Пользователь с id=" + userId + " не найден"));
@@ -161,6 +166,7 @@ public class EventServiceImpl implements EventService {
         int limit = event.getParticipantLimit();
         List<Request> confirmedRequests = new ArrayList<>();
         List<Request> rejectedRequests = new ArrayList<>();
+        List<Long> userIds = new ArrayList<>();
         if (event.getParticipantLimit() == 0 || !event.getRequestModeration()) {
             for (Request request : requests) {
                 if (!request.getStatus().equals(RequestStatus.PENDING)) {
@@ -171,7 +177,8 @@ public class EventServiceImpl implements EventService {
                         amountConfirmedRequests,
                         confirmedRequests,
                         rejectedRequests,
-                        request);
+                        request,
+                        userIds);
             }
         }
         for (Request request : requests) {
@@ -184,10 +191,24 @@ public class EventServiceImpl implements EventService {
                         amountConfirmedRequests,
                         confirmedRequests,
                         rejectedRequests,
-                        request);
+                        request,
+                        userIds);
             } else {
                 rejectedRequests.add(request);
             }
+        }
+        List<User> users = userStorage.findAllById(userIds);
+        if (!users.isEmpty()) {
+            List<User> usersForSave = new ArrayList<>();
+            for (User user : users) {
+                if (user.getShowEventsState().equals(ShowEventsState.ALL)) {
+                    List<Long> events = user.getUserEvents().isEmpty() ? new ArrayList<>() : user.getUserEvents();
+                    events.add(event.getId());
+                    user.setUserEvents(events);
+                    usersForSave.add(user);
+                }
+            }
+            userStorage.saveAll(usersForSave);
         }
         event.setConfirmedRequests(amountConfirmedRequests);
         eventStorage.save(event);
@@ -203,11 +224,13 @@ public class EventServiceImpl implements EventService {
                                   int amountConfirmedRequests,
                                   List<Request> confirmedRequests,
                                   List<Request> rejectedRequests,
-                                  Request request) {
+                                  Request request,
+                                  List<Long> users) {
         if (incomingRequests.getStatus().equals(RequestStatus.CONFIRMED)) {
             request.setStatus(RequestStatus.CONFIRMED);
             confirmedRequests.add(request);
             ++amountConfirmedRequests;
+            users.add(request.getRequester().getId());
         } else {
             request.setStatus(RequestStatus.REJECTED);
             rejectedRequests.add(request);
@@ -217,6 +240,7 @@ public class EventServiceImpl implements EventService {
 
     //Admin
     @Override
+    @Transactional(readOnly = true)
     public List<EventFullDto> getWithFilters(List<Long> users,
                                              List<EventState> states,
                                              List<Long> categories,
@@ -228,10 +252,16 @@ public class EventServiceImpl implements EventService {
         GetAdminEvent getAdminEvent = new GetAdminEvent(users, states, categories, rangeStart, rangeEnd);
         BooleanExpression conditions = makeAdminEventQueryFilters(getAdminEvent);
         Page<Event> events = eventStorage.findAll(conditions, page);
-        return events.isEmpty() ? new ArrayList<>() : setCategoriesAndReturnList(events.toList());
+        return events.isEmpty() ? new ArrayList<>() : setCategoriesAndReturnList(events.toList(),
+                categoryStorage,
+                categoryMapper,
+                eventMapper);
     }
 
-    private List<EventFullDto> setCategoriesAndReturnList(List<Event> events) {
+    protected static List<EventFullDto> setCategoriesAndReturnList(List<Event> events,
+                                                                   CategoryStorage categoryStorage,
+                                                                   CategoryMapper categoryMapper,
+                                                                   EventMapper eventMapper) {
         List<Long> categoriesId = new ArrayList<>();
         for (Event event : events) {
             categoriesId.add(event.getCategory());
@@ -243,6 +273,7 @@ public class EventServiceImpl implements EventService {
                 .peek(eventFullDto -> eventFullDto.setCategory(categories.get(eventFullDto.getCategory().getId())))
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public EventFullDto adminUpdate(UpdateEventAdminRequestDto updateEventDto, Long eventId) {
@@ -318,6 +349,7 @@ public class EventServiceImpl implements EventService {
 
     //Public
     @Override
+    @Transactional(readOnly = true)
     public List<EventFullDto> userGetByFilters(String text,
                                                List<Long> categories,
                                                Boolean paid,
@@ -406,7 +438,7 @@ public class EventServiceImpl implements EventService {
         List<BooleanExpression> conditions = new ArrayList<>();
 
         if (getUserEvent.getText() != null) {
-            String textToSearch = getUserEvent.getText();;
+            String textToSearch = getUserEvent.getText();
             conditions.add(qEvent.title.containsIgnoreCase(textToSearch)
                     .or(qEvent.annotation.containsIgnoreCase(textToSearch))
                     .or(qEvent.description.containsIgnoreCase(textToSearch)));
