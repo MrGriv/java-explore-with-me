@@ -97,7 +97,7 @@ public class FriendServiceImpl implements FriendService {
                         " для отображения друзьям");
             }
             List<Request> requests = requestStorage.findAllByEventId(events, user.getId());
-            
+
             if (requests.isEmpty()) {
                 throw new ConflictException("User: в списке событий не обнаружены указанные события: " + events);
             }
