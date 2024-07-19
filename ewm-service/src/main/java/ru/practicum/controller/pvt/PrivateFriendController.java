@@ -25,7 +25,7 @@ public class PrivateFriendController {
                                                       @PathVariable Long friendId,
                                                       @RequestParam(defaultValue = "0") int from,
                                                       @RequestParam(defaultValue = "10") int size) {
-        return friendService.getFriendParticipations(id, friendId, from, size);
+        return friendService.getFriendParticipation(id, friendId, from, size);
     }
 
     @PatchMapping

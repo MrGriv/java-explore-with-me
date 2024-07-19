@@ -24,5 +24,5 @@ public class ApiPathConstants {
     public static final String ADMIN_EVENTS_PATH = ADMIN_PATH + "/" + EVENTS_PATH;
     public static final String USER_ID_REQUEST_PATH = USERS_PATH + "/" + BY_ID_PATH + "/" + REQUEST_PATH;
     public static final String ADMIN_COMPILATIONS_PATH = ADMIN_PATH + "/" + COMPILATIONS_PATH;
-    public static final String USER_ID_FRIEND_PATH = USERS_PATH + "/" + BY_ID_PATH + "/" +FRIENDS_PATH;
+    public static final String USER_ID_FRIEND_PATH = USERS_PATH + "/" + BY_ID_PATH + "/" + FRIENDS_PATH;
 }

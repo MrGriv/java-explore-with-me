@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface FriendService {
     void add(Long userId, Long friendId);
-    
-    List<EventFullDto> getFriendParticipations(Long userId, Long friendId, int from, int size);
+
+    List<EventFullDto> getFriendParticipation(Long userId, Long friendId, int from, int size);
 
     void changeEventsVisibility(Long userId, ShowEventsState state, List<Long> events);
 }

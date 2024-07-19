@@ -54,7 +54,7 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<EventFullDto> getFriendParticipations(Long userId, Long friendId, int from, int size) {
+    public List<EventFullDto> getFriendParticipation(Long userId, Long friendId, int from, int size) {
         User user = userStorage.findById(userId)
                 .orElseThrow(() -> new NotFoundException("User: Пользователь с id=" + userId + " не найден"));
         User friend = userStorage.findById(friendId)
