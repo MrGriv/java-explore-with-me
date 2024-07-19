@@ -6,452 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "Создание инициатора эвента с id 1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Shari Robel\",\r\n    \"email\": \"Royce7@gmail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/admin/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"admin",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Создание инициатора эвента",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"UIvan\",\r\n    \"email\": \"iv@gmail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/admin/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"admin",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Создание инициатора эвента",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Petr\",\r\n    \"email\": \"st@ya.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/admin/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"admin",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Создание пользователя с id 4",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Bob\",\r\n\"email\":\"rad@mail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/admin/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"admin",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Создание пользователя с id 5 друга пользоватеся с id 4",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Eva\",\r\n\"email\":\"eve@online.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/admin/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"admin",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Добавление категории",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"experiences592\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/admin/categories",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"admin",
-						"categories"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Создание евента с id 1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"annotation\": \"Facere molestiae facere. Non omnis occaecati eos omnis voluptas non dicta temporibus. Tenetur aut amet excepturi amet molestias voluptas repudiandae et. Officia qui tenetur inventore iure suscipit facilis voluptatem.\",\r\n    \"category\": 1,\r\n    \"description\": \"Et velit est iste quis sunt eveniet est. Enim aut eius beatae. Nihil provident omnis et reiciendis voluptas consequuntur. Quae quia maiores nihil delectus tenetur nam minus quibusdam facere.\\n \\rVoluptates eum sit odio corporis repellat. In occaecati inventore labore sed nam voluptatem commodi provident quis. Quidem expedita neque. Et quia odio ea quas minima officia eveniet.\\n \\rVelit doloremque eveniet tempore cum consequatur ut consequatur et ut. Aut ut nostrum aut rerum voluptatum aliquam quo voluptas. Magnam sint minima et molestias sint minima placeat dolorem vel.\",\r\n    \"eventDate\": \"2024-07-19 04:41:06\",\r\n    \"location\": {\r\n        \"lat\": -88.362,\r\n        \"lon\": -123.946\r\n    },\r\n    \"paid\": \"true\",\r\n    \"participantLimit\": \"596\",\r\n    \"requestModeration\": \"true\",\r\n    \"title\": \"Blanditiis tenetur esse tempore voluptatibus quidem quis itaque.\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/users/1/events",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"1",
-						"events"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Создание евента с id 2",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"annotation\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\r\n    \"category\": 1,\r\n    \"description\": \"aa aa aaa aaaaa aaaaa aaaa a\",\r\n    \"eventDate\": \"2024-07-19 04:41:06\",\r\n    \"location\": {\r\n        \"lat\": -99.362,\r\n        \"lon\": -111.946\r\n    },\r\n    \"paid\": \"true\",\r\n    \"participantLimit\": \"0\",\r\n    \"requestModeration\": \"true\",\r\n    \"title\": \"a.a.a.a.a.a.aa.a.a.a.a.\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/users/1/events",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"1",
-						"events"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Создание евента с id 3",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"annotation\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\r\n    \"category\": 1,\r\n    \"description\": \"bbbbbbbbbbb bbbbbbbbbb bbbbbbbb bbbbb bbb bb\",\r\n    \"eventDate\": \"2024-07-19 04:41:06\",\r\n    \"location\": {\r\n        \"lat\": -33.362,\r\n        \"lon\": -22.946\r\n    },\r\n    \"paid\": \"true\",\r\n    \"participantLimit\": \"596\",\r\n    \"requestModeration\": \"false\",\r\n    \"title\": \"b!<!<!<!<!<!<!<!<!<!<!<!<!<!<!<<!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/users/1/events",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"1",
-						"events"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Редактирование статуса евента с id 1",
 			"event": [
 				{
@@ -473,7 +27,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
+					"raw": "{\r\n    \"annotation\": \"Facere molestiae facere. Non omnis occaecati eos omnis voluptas non dicta temporibus. Tenetur aut amet excepturi amet molestias voluptas repudiandae et. Officia qui tenetur inventore iure suscipit facilis voluptatem.\",\r\n    \"category\": 1,\r\n    \"description\": \"Et velit est iste quis sunt eveniet est. Enim aut eius beatae. Nihil provident omnis et reiciendis voluptas consequuntur. Quae quia maiores nihil delectus tenetur nam minus quibusdam facere.\\n \\rVoluptates eum sit odio corporis repellat. In occaecati inventore labore sed nam voluptatem commodi provident quis. Quidem expedita neque. Et quia odio ea quas minima officia eveniet.\\n \\rVelit doloremque eveniet tempore cum consequatur ut consequatur et ut. Aut ut nostrum aut rerum voluptatum aliquam quo voluptas. Magnam sint minima et molestias sint minima placeat dolorem vel.\",\r\n    \"eventDate\": \"2025-07-19 04:41:06\",\r\n    \"location\": {\r\n        \"lat\": -88.362,\r\n        \"lon\": -123.946\r\n    },\r\n    \"paid\": \"true\",\r\n    \"participantLimit\": \"596\",\r\n    \"requestModeration\": \"true\",\r\n    \"title\": \"Blanditiis tenetur esse tempore voluptatibus quidem quis itaque.\",\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -497,7 +51,7 @@
 			"response": []
 		},
 		{
-			"name": "Редактирование статуса евента с id 2",
+			"name": "Редактирование статуса евента с id 4",
 			"event": [
 				{
 					"listen": "test",
@@ -518,7 +72,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
+					"raw": "{\r\n    \"annotation\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\r\n    \"category\": 1,\r\n    \"description\": \"aa aa aaa aaaaa aaaaa aaaa a\",\r\n    \"eventDate\": \"2025-07-19 04:41:06\",\r\n    \"location\": {\r\n        \"lat\": -99.362,\r\n        \"lon\": -111.946\r\n    },\r\n    \"paid\": \"true\",\r\n    \"participantLimit\": \"0\",\r\n    \"requestModeration\": \"true\",\r\n    \"title\": \"a.a.a.a.a.a.aa.a.a.a.a.\",\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -526,7 +80,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/admin/events/2",
+					"raw": "http://localhost:8080/admin/events/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -535,7 +89,7 @@
 					"path": [
 						"admin",
 						"events",
-						"2"
+						"4"
 					]
 				}
 			},
@@ -563,7 +117,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
+					"raw": "{\r\n    \"annotation\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\r\n    \"category\": 1,\r\n    \"description\": \"bbbbbbbbbbb bbbbbbbbbb bbbbbbbb bbbbb bbb bb\",\r\n    \"eventDate\": \"2025-07-19 04:41:06\",\r\n    \"location\": {\r\n        \"lat\": -33.362,\r\n        \"lon\": -22.946\r\n    },\r\n    \"paid\": \"true\",\r\n    \"participantLimit\": \"596\",\r\n    \"requestModeration\": \"false\",\r\n    \"title\": \"b!<!<!<!<!<!<!<!<!<!<!<!<!<!<!<<!\",\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -680,7 +234,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/4/requests?eventId=2",
+					"raw": "http://localhost:8080/users/4/requests?eventId=4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -694,7 +248,7 @@
 					"query": [
 						{
 							"key": "eventId",
-							"value": "2"
+							"value": "4"
 						}
 					]
 				}
@@ -921,7 +475,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"requestIds\": [\r\n        3\r\n    ],\r\n    \"status\": \"CONFIRMED\"\r\n}",
+					"raw": "{\r\n    \"requestIds\": [\r\n        16\r\n    ],\r\n    \"status\": \"CONFIRMED\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -929,7 +483,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/1/events/1/requests",
+					"raw": "http://localhost:8080/users/2/events/1/requests",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -937,7 +491,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"1",
+						"2",
 						"events",
 						"1",
 						"requests"
@@ -1003,7 +557,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/4/friends?state=CHOSEN&events=1&events=2",
+					"raw": "http://localhost:8080/users/4/friends?state=CHOSEN&events=1&events=4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1025,7 +579,7 @@
 						},
 						{
 							"key": "events",
-							"value": "2"
+							"value": "4"
 						}
 					]
 				}
@@ -1317,7 +871,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/5/friends?state=CHOSEN&events=2&events=3",
+					"raw": "http://localhost:8080/users/5/friends?state=CHOSEN&events=4&events=3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1335,7 +889,7 @@
 						},
 						{
 							"key": "events",
-							"value": "2"
+							"value": "4"
 						},
 						{
 							"key": "events",
@@ -1407,7 +961,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/5/friends?state=CHOSEN&events=2&events=3",
+					"raw": "http://localhost:8080/users/5/friends?state=CHOSEN&events=4&events=3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1425,7 +979,7 @@
 						},
 						{
 							"key": "events",
-							"value": "2"
+							"value": "4"
 						},
 						{
 							"key": "events",
