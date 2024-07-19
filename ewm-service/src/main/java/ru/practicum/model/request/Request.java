@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.practicum.model.User;
+import ru.practicum.model.user.User;
 import ru.practicum.model.event.Event;
 
 import javax.persistence.*;

@@ -2,6 +2,7 @@ package ru.practicum.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.compilation.CompilationDto;
 import ru.practicum.dto.compilation.NewCompilationDto;
@@ -11,7 +12,7 @@ import ru.practicum.util.ApiPathConstants;
 
 import javax.validation.Valid;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping(ApiPathConstants.ADMIN_COMPILATIONS_PATH)
 public class AdminCompilationsController {
@@ -28,7 +29,7 @@ public class AdminCompilationsController {
     }
 
     @PatchMapping(ApiPathConstants.BY_ID_PATH)
-    public CompilationDto update(@Valid @RequestBody UpdateCompilationRequest updateCompilation,
+    public ResponseEntity<CompilationDto> update(@Valid @RequestBody UpdateCompilationRequest updateCompilation,
                                  @PathVariable Long id) {
         return compilationService.update(updateCompilation, id);
     }

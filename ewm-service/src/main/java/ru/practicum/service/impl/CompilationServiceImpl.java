@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.dto.compilation.CompilationDto;
 import ru.practicum.dto.compilation.NewCompilationDto;
 import ru.practicum.dto.compilation.UpdateCompilationRequest;
@@ -26,6 +27,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CompilationServiceImpl implements CompilationService {
     private final CompilationStorage compilationStorage;
@@ -50,7 +52,7 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
-    public CompilationDto update(UpdateCompilationRequest updateCompilation,
+    public ResponseEntity<CompilationDto> update(UpdateCompilationRequest updateCompilation,
                                  Long compilationId) {
         Compilation compilation = compilationStorage.findById(compilationId)
                 .orElseThrow(() -> new NotFoundException("Compilation: Список событий с id=" + compilationId +
@@ -65,10 +67,11 @@ public class CompilationServiceImpl implements CompilationService {
         List<Event> events = eventStorage.findAllByIdIn(savedCompilation.getEvents());
         CompilationDto compilationDto = compilationMapper.toDto(savedCompilation);
         compilationDto.setEvents(events.stream().map(eventMapper::toShortDto).collect(Collectors.toList()));
-        return compilationDto;
+        return new ResponseEntity<>(compilationDto, HttpStatus.OK);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CompilationDto> get(Boolean pinned, int from, int size) {
         PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
         Page<Compilation> compilations;

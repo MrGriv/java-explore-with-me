@@ -11,7 +11,7 @@ public interface CategoryService {
 
     ResponseEntity<Void> delete(Long categoryId);
 
-    CategoryDto update(Long id, NewCategoryDto newCategoryDto);
+    ResponseEntity<CategoryDto> update(Long id, NewCategoryDto newCategoryDto);
 
     List<CategoryDto> get(int from, int size);
 

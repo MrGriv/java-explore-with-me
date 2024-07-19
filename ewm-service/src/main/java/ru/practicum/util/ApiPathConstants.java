@@ -14,6 +14,8 @@ public class ApiPathConstants {
     public static final String REQUEST_ID_PATH = "{requestId}";
     public static final String CANCEL_PATH = "cancel";
     public static final String COMPILATIONS_PATH = "compilations";
+    public static final String FRIENDS_PATH = "friends";
+    public static final String FRIEND_ID = "{friendId}";
     public static final String ID_CANCEL_PATH = REQUEST_ID_PATH + "/" + CANCEL_PATH;
     public static final String ADMIN_USERS_PATH = ADMIN_PATH + "/" + USERS_PATH;
     public static final String PRIVATE_USERS_EVENTS = USERS_PATH + "/" + BY_ID_PATH + "/" + EVENTS_PATH;
@@ -22,4 +24,5 @@ public class ApiPathConstants {
     public static final String ADMIN_EVENTS_PATH = ADMIN_PATH + "/" + EVENTS_PATH;
     public static final String USER_ID_REQUEST_PATH = USERS_PATH + "/" + BY_ID_PATH + "/" + REQUEST_PATH;
     public static final String ADMIN_COMPILATIONS_PATH = ADMIN_PATH + "/" + COMPILATIONS_PATH;
+    public static final String USER_ID_FRIEND_PATH = USERS_PATH + "/" + BY_ID_PATH + "/" + FRIENDS_PATH;
 }

@@ -2,6 +2,7 @@ package ru.practicum.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.user.UserDto;
 import ru.practicum.service.UserService;
@@ -10,7 +11,7 @@ import ru.practicum.util.ApiPathConstants;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping(ApiPathConstants.ADMIN_USERS_PATH)
 public class AdminUserController {
@@ -22,7 +23,7 @@ public class AdminUserController {
     }
 
     @GetMapping
-    public List<UserDto> get(@RequestParam(defaultValue = "") List<Long> ids,
+    public ResponseEntity<List<UserDto>> get(@RequestParam(defaultValue = "") List<Long> ids,
                              @RequestParam(defaultValue = "0") int from,
                              @RequestParam(defaultValue = "10") int size) {
         return userService.get(ids, from, size);

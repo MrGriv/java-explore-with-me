@@ -2,6 +2,7 @@ package ru.practicum.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.category.CategoryDto;
 import ru.practicum.dto.category.NewCategoryDto;
@@ -10,7 +11,7 @@ import ru.practicum.util.ApiPathConstants;
 
 import javax.validation.Valid;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping(ApiPathConstants.ADMIN_CATEGORY_PATH)
 public class AdminCategoryController {
@@ -27,7 +28,7 @@ public class AdminCategoryController {
     }
 
     @PatchMapping(ApiPathConstants.BY_ID_PATH)
-    public CategoryDto update(@PathVariable Long id,
+    public ResponseEntity<CategoryDto> update(@PathVariable Long id,
                               @Valid @RequestBody NewCategoryDto newCategoryDto) {
         return categoryService.update(id, newCategoryDto);
     }
